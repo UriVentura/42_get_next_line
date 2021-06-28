@@ -27,22 +27,6 @@ void	*gnl_memchr(const void *s, int c, size_t n)
 	return (NULL);
 }
 
-void	*gnl_memalloc(size_t size)
-{
-	unsigned char	*ptr;
-
-	ptr = NULL;
-	if (size)
-	{
-		if (!ptr)
-			return (NULL);
-		ptr = (unsigned char *)malloc(size);
-		while (size)
-			ptr[--size] = 0;
-	}
-	return ((void *)ptr);
-}
-
 int	fill_line(char **save, char **line)
 {
 	char	*tmp;
@@ -55,13 +39,8 @@ int	fill_line(char **save, char **line)
 	{
 		*line = gnl_substr(*save, 0, len);
 		tmp = gnl_strdup((*save) + len + 1);
-		free((*save));
-		(*save) = tmp;
-		if ((*save)[0] == '\0')
-		{
-			free(*save);
-			save = NULL;
-		}
+		free(*save);
+		*save = tmp;
 	}
 	else if ((*save)[len] == '\0')
 	{
@@ -79,8 +58,10 @@ int	get_next_line(int fd, char **line)
 	char		*temp;
 	int			ret;
 
+
 	if (fd < 0 || !line)
 		return (-1);
+	ret = 1;
 	while (ret)
 	{
 		ret = read(fd, buf, BUFFER_SIZE) > 0;
@@ -95,21 +76,22 @@ int	get_next_line(int fd, char **line)
 	}
 	if (ret < 0)
 		return (-1);
-	else if (ret == 0 && (!save || save[0] == '\0'))
+	else if (ret == 0 && (!save))
 		return (0);
 	return (fill_line(&save, line));
 }
 
-int	main(int argc, char **argv)
+/*int main()
 {
-	int		fd;
+	int 	fd;
 	char	*line;
-
-	if (argc || argv)
-		;
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
+	int		i = 1;
+	fd = open("text.txt", O_RDONLY);
+	while (i)
+	{
+		i = get_next_line(fd, &line);
+		printf("%d ", i);
 		printf("%s\n", line);
+	}
 	close(fd);
-	return (0);
-}
+}*/

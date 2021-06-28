@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 4000
+# define BUFFER_SIZE 50
 #endif
 
 int		get_next_line(int fd, char **line);
@@ -18,6 +18,5 @@ char	*gnl_strchr(const char *s, int c);
 char	*gnl_strjoin(char const *s1, char const *s2);
 size_t	gnl_strlen(const char *str);
 void	*gnl_memchr(const void *s, int c, size_t n);
-void	*gnl_memalloc(size_t size);
 
 #endif
