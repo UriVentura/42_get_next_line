@@ -29,7 +29,7 @@ void	*gnl_memchr(const void *s, int c, size_t n)
 
 int	fill_line(char **save, char **line)
 {
-	char	*tmp;
+	char	*temp;
 	int		len;
 
 	len = 0;
@@ -38,15 +38,16 @@ int	fill_line(char **save, char **line)
 	if ((*save)[len] == '\n')
 	{
 		*line = gnl_substr(*save, 0, len);
-		tmp = gnl_strdup((*save) + len + 1);
+		temp = gnl_strdup((*save) + len + 1);
 		free(*save);
-		*save = tmp;
+		*save = temp;
 	}
 	else if ((*save)[len] == '\0')
 	{
 		*line = gnl_strdup(*save);
 		free(*save);
 		save = NULL;
+		return (0);
 	}
 	return (1);
 }
@@ -62,12 +63,16 @@ int	get_next_line(int fd, char **line)
 	if (fd < 0 || !line)
 		return (-1);
 	ret = 1;
-	while (ret)
+	while (ret > 0)
 	{
-		ret = read(fd, buf, BUFFER_SIZE) > 0;
+		ret = read(fd, buf, BUFFER_SIZE);
 		buf[ret] = '\0';
 		if (!save)
-			save = gnl_strnew(1);
+		{
+			save = gnl_strdup("");
+			//printf("Entra\n");
+		}
+		//printf("save = %s\n", save);
 		temp = gnl_strjoin(save, buf);
 		free(save);
 		save = temp;
@@ -92,6 +97,8 @@ int	get_next_line(int fd, char **line)
 		i = get_next_line(fd, &line);
 		printf("%d ", i);
 		printf("%s\n", line);
+		free(line);
 	}
 	close(fd);
+	system("leaks gnl");
 }*/

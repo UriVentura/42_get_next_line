@@ -43,10 +43,15 @@ char	*gnl_strdup(const char *s1)
 char	*gnl_strnew(size_t size)
 {
 	char	*tmp;
+	size_t	i;
+
 	tmp = (char *)malloc(sizeof(char) * (size + 1));
 	if (!tmp)
 		return (NULL);
-	tmp[size + 1] = '\0';
+	i = 0;
+	while (i < size)
+		tmp[i++] = '\0';
+	tmp[size] = '\0';
 	return (tmp);
 }
 
