@@ -39,6 +39,7 @@ int	fill_line(char **save, char **line)
 	{
 		*line = gnl_substr(*save, 0, len);
 		temp = gnl_strdup((*save) + len + 1);
+		if (save)
 		free(*save);
 		*save = temp;
 	}
@@ -59,20 +60,17 @@ int	get_next_line(int fd, char **line)
 	char		*temp;
 	int			ret;
 
-
 	if (fd < 0 || !line)
 		return (-1);
 	ret = 1;
 	while (ret > 0)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
+		if (ret < 0)
+			return (-1);
 		buf[ret] = '\0';
 		if (!save)
-		{
 			save = gnl_strdup("");
-			//printf("Entra\n");
-		}
-		//printf("save = %s\n", save);
 		temp = gnl_strjoin(save, buf);
 		free(save);
 		save = temp;
@@ -86,12 +84,13 @@ int	get_next_line(int fd, char **line)
 	return (fill_line(&save, line));
 }
 
-/*int main()
+int main()
 {
 	int 	fd;
 	char	*line;
 	int		i = 1;
-	fd = open("text.txt", O_RDONLY);
+//	fd = open("text.txt", O_RDONLY);
+	fd = 329753272;
 	while (i)
 	{
 		i = get_next_line(fd, &line);
@@ -100,5 +99,5 @@ int	get_next_line(int fd, char **line)
 		free(line);
 	}
 	close(fd);
-	system("leaks gnl");
-}*/
+	//system("leaks a");
+}
