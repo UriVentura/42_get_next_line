@@ -11,7 +11,7 @@ char	*gnl_substr(char const *s, unsigned int start, size_t len)
 		return (gnl_strdup(""));
 	if (len > gnl_strlen(s) - start - 1)
 		len = gnl_strlen(s) - start ;
-	str = (char *)malloc((len + 1) * sizeof(char));
+	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	aux = str;
@@ -27,7 +27,7 @@ char	*gnl_strdup(const char *s1)
 	size_t	i;
 
 	i = 0;
-	s2 = (char *) malloc(sizeof (*s1) * (gnl_strlen(s1) + 1));
+	s2 = malloc(sizeof (*s1) * (gnl_strlen(s1) + 1));
 	if (!s2)
 		return (NULL);
 	i = 0;
@@ -38,21 +38,6 @@ char	*gnl_strdup(const char *s1)
 	}
 	s2[i] = '\0';
 	return (s2);
-}
-
-char	*gnl_strnew(size_t size)
-{
-	char	*tmp;
-	size_t	i;
-
-	tmp = (char *)malloc(sizeof(char) * (size + 1));
-	if (!tmp)
-		return (NULL);
-	i = 0;
-	while (i < size)
-		tmp[i++] = '\0';
-	tmp[size] = '\0';
-	return (tmp);
 }
 
 char	*gnl_strchr(const char *s, int c)
@@ -78,7 +63,7 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	str = (char *)malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
+	str = malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
 	if (!str)
 		return (NULL);
 	aux = str;
@@ -88,4 +73,17 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 		*aux++ = *s2++;
 	*aux = '\0';
 	return (str);
+}
+
+size_t	gnl_strlen(const char *str)
+{
+	unsigned int	count;
+
+	count = 0;
+	while (*str != '\0')
+	{
+		count++;
+		str++;
+	}
+	return (count);
 }
