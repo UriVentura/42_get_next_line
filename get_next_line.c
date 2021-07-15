@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oventura <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/15 17:43:13 by oventura          #+#    #+#             */
+/*   Updated: 2021/07/15 17:43:14 by oventura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 void	gnl_read(int fd, char *buf, char **save)
@@ -52,7 +64,7 @@ char	*gnl_fill_lane(char **save)
 	return (res);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	char		*buf;
 	static char	*save;
@@ -67,7 +79,7 @@ char *get_next_line(int fd)
 	return (gnl_fill_lane(&save));
 }
 
-int main()
+/*int	main()
 {
 	int	fd;
 	char *line;
@@ -83,4 +95,4 @@ int main()
 	}
 	close(fd);
 //	system("leaks gnl");
-}
+}*/
