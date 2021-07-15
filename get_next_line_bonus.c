@@ -75,6 +75,6 @@ char	*get_next_line(int fd)
 		free(buf);
 		return (NULL);
 	}
-	gnl_read(fd, buf, &save);
-	return (gnl_fill_lane(&save));
+	gnl_read(fd, buf, &save[fd]);
+	return (gnl_fill_lane(&save[fd]));
 }
