@@ -72,7 +72,7 @@ int main()
 	int	fd;
 	fd = open("text.txt", O_RDONLY);
 	//fd = 0;
-	printf("%d \n", fd);
+	printf("%s \n", get_next_line(fd));
 	close(fd);
-	//system("leaks gnl");
+	system("leaks gnl");
 }
