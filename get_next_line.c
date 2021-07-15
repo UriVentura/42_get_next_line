@@ -70,9 +70,17 @@ char *get_next_line(int fd)
 int main()
 {
 	int	fd;
+	char *line;
 	fd = open("text.txt", O_RDONLY);
 	//fd = 0;
-	printf("%s \n", get_next_line(fd));
+	int i;
+	i = 4;
+	while (i--)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		free(line);
+	}
 	close(fd);
-	system("leaks gnl");
+//	system("leaks gnl");
 }
