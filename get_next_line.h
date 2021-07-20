@@ -32,3 +32,4 @@ char		*gnl_strjoin(char const *s1, char const *s2);
 size_t		gnl_strlen(const char *str);
 
 #endif
+

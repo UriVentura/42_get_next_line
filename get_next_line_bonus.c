@@ -67,7 +67,7 @@ char	*gnl_fill_lane(char **save)
 char	*get_next_line(int fd)
 {
 	char		*buf;
-	static char	save[FD_SETSIZE];
+	static char	*save[FD_SETSIZE];
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (BUFFER_SIZE < 1 || fd == -1 || !buf || read(fd, buf, 0) == -1)

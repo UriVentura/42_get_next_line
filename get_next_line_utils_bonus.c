@@ -99,3 +99,4 @@ size_t	gnl_strlen(const char *str)
 	}
 	return (count);
 }
+

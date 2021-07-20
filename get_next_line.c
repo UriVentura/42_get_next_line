@@ -78,3 +78,4 @@ char	*get_next_line(int fd)
 	gnl_read(fd, buf, &save[fd]);
 	return (gnl_fill_lane(&save[fd]));
 }
+
